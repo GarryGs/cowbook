@@ -26,7 +26,7 @@ function CowTable({ cows, onDelete, onEdit }) {
         {cows.map(cow => (
           <tr key={cow._id}>
             <td>{cow.serial_no}</td>
-            <td>{cow.DOB}</td>
+            <td>{cow.dob}</td>
             <td>{cow.no_of_calf}</td>
             <td>{cow.breed}</td>
             <td>{cow.gender}</td>

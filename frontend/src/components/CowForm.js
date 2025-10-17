@@ -5,7 +5,7 @@ import "./CowForm.css";
 const CowForm = ({ cowData, onSuccess, onCancel }) => {
   const [formData, setFormData] = useState({
     serial_no: "",
-    DOB: "",
+    dob: "",
     no_of_calf: "",
     breed: "",
     weight: "",
@@ -16,10 +16,10 @@ const CowForm = ({ cowData, onSuccess, onCancel }) => {
     if (cowData) {
       setFormData({
         serial_no: cowData.serial_no || "",
-        DOB: cowData.DOB ? cowData.DOB.split("T")[0] : "",
-        no_of_calf: cowData.no_of_calf || "",
+        dob: cowData.DOB ? cowData.dob.split("T")[0] : "",
+        no_of_calf: Number(cowData.no_of_calf) || 0,
         breed: cowData.breed || "",
-        weight: cowData.weight || "",
+        weight: Number(cowData.weight) || 0,
         health: cowData.health || "Healthy",
       });
     }
@@ -55,7 +55,7 @@ const CowForm = ({ cowData, onSuccess, onCancel }) => {
 
         <div className="cow-attr">
           <label>Date of Birth:</label>
-          <input type="date" name="DOB" value={formData.DOB} onChange={handleChange} required />
+          <input type="date" name="dob" value={formData.dob} onChange={handleChange} required />
         </div>
 
         <div className="cow-attr">

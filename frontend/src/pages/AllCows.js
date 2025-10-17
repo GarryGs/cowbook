@@ -58,7 +58,7 @@ const AllCows = () => {
             cows.map((cow) => (
               <div key={cow._id} className="cow-card">
                 <h3>Serial No: {cow.serial_no}</h3>
-                <p><strong>Date of Birth:</strong> {new Date(cow.DOB).toLocaleDateString()}</p>
+                <p><strong>Date of Birth:</strong> {new Date(cow.dob).toLocaleDateString()}</p>
                 <p><strong>No. of Calves:</strong> {cow.no_of_calf}</p>
                 <p><strong>Breed:</strong> {cow.breed || "N/A"}</p>
                 <p><strong>Weight:</strong> {cow.weight || "N/A"} kg</p>
