@@ -4,7 +4,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Add cow
+// add a cow
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const { serial_no, dob, no_of_calf, breed, weight, health } = req.body;
@@ -24,7 +24,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Get user’s cows
+// get user’s cows
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const cows = await Cow.find({ user: req.userId });
@@ -49,7 +49,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Delete cow
+// delete cow
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const cow = await Cow.findOneAndDelete({ _id: req.params.id, userId: req.userId });
