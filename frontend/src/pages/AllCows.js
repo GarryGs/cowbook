@@ -9,7 +9,7 @@ const AllCows = () => {
 
   const fetchCows = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cows");
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/cows`);
       setCows(res.data);
     } catch (err) {
       console.error("Error fetching cows:", err);
@@ -19,7 +19,7 @@ const AllCows = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this cow?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/cows/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/cows/${id}`);
       fetchCows();
     } catch (err) {
       alert(err.response?.data?.error || err.message);

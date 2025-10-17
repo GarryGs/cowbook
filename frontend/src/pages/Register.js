@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Loader from "../components/Loader";
 import "./Auth.css";
 
 const Register = () => {
@@ -9,14 +10,18 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", { name, email, password });
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register` , { name, email, password });
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,7 +33,9 @@ const Register = () => {
         <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? <Loader /> : "Register"}
+        </button>
       </form>
       <p>Already registered? <Link to="/login">Login</Link></p>
     </div>

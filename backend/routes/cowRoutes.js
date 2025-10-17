@@ -38,7 +38,7 @@ router.get("/", authMiddleware, async (req, res) => {
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
     const cow = await Cow.findOneAndUpdate(
-      { _id: req.params.id, userId: req.userId },
+      { _id: req.params.id, user: req.userId },
       req.body,
       { new: true }
     );
@@ -52,7 +52,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
 // delete cow
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const cow = await Cow.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    const cow = await Cow.findOneAndDelete({ _id: req.params.id, user: req.userId });
     if (!cow) return res.status(404).json({ message: "Cow not found" });
     res.json({ message: "Cow deleted successfully" });
   } catch (error) {

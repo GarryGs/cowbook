@@ -16,7 +16,7 @@ const CowForm = ({ cowData, onSuccess, onCancel }) => {
     if (cowData) {
       setFormData({
         serial_no: cowData.serial_no || "",
-        dob: cowData.DOB ? cowData.dob.split("T")[0] : "",
+        dob: cowData.dob ? new Date(cowData.dob).toISOString().split("T")[0] : "",
         no_of_calf: Number(cowData.no_of_calf) || 0,
         breed: cowData.breed || "",
         weight: Number(cowData.weight) || 0,
@@ -34,9 +34,9 @@ const CowForm = ({ cowData, onSuccess, onCancel }) => {
     e.preventDefault();
     try {
       if (cowData) {
-        await axios.put(`http://localhost:5000/api/cows/${cowData._id}`, formData);
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/cows/${cowData._id}`, formData);
       } else {
-        await axios.post("http://localhost:5000/api/cows", formData);
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/cows`, formData);
       }
 
       if (typeof onSuccess === "function") onSuccess();
